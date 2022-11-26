@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+message User {
+    string _id = 1;
+    string name = 2;
+    string address = 3;
+}
+
+service UserService {
+    rpc GetAllUser (Empty) returns (UserList) {}
+    rpc GetUserById (UserIdParam) returns (User) {}
+    rpc AddNewUser (UserAddRequest) returns (StatusResponse) {}
+    rpc DeleteUserById (UserIdParam) returns (StatusResponse) {}
+    rpc ReplaceUserById (UserReplaceRequest) returns (StatusResponse) {}
+}
+
+message Empty {}
+
+message UserList {
+    repeated User users = 1;
+}
+
+message UserIdParam {
+    string _id = 1;
+}
+
+message StatusResponse {
+    bool isSuccess = 1;
+    string message = 2;
+}
+
+message UserAddRequest {
+    string name = 1;
+    string address = 2;
+}
+
+message UserReplaceRequest {
+    string _id = 1;
+    string name = 2;
+    string address = 3;
+}
+
